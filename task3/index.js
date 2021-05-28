@@ -14,22 +14,50 @@
 // input: number;
 // output: undefined
 
-function getPrimes(num) {
-  for (let index = 2; index <= num; index += 1) {
+// function getPrimes(num) {
+//   for (let index = 2; index <= num; index += 1) {
 
-    let isPrime = true;
+//     let isPrime = true;
 
-    for (let number = 2; number < index; number += 1) {
-      if(index % number === 0) {
-        isPrime = false;
-        break;
-      }
+//     for (let number = 2; number < index; number += 1) {
+//       if(index % number === 0) {
+//         isPrime = false;
+//         break;
+//       }
+//     }
+
+//     if(isPrime) {
+//       console.log(index);
+//     }
+//   }
+// }
+// getPrimes(15);
+
+
+const squareArray = arr => Array.isArray(arr) ? arr.map(num => num * num) : null;
+
+console.log(squareArray(222));
+console.log(squareArray([1, 2, 4]));
+
+// input: number;
+// output: boolean;
+
+function checkIsPrime(number) {
+  for (let innerNum = 2; innerNum < number; innerNum += 1) {
+    if(number % innerNum === 0) {
+      return false;
     }
+  }
 
-    if(isPrime) {
-      console.log(index);
+  return true;
+}
+
+function getPrimes(num) {
+  for (let number = 2; number <= num; number += 1) {
+    if (checkIsPrime(number)) {
+      console.log(number);
     }
   }
 }
 
-console.log(getPrimes(15));
+getPrimes(15);
