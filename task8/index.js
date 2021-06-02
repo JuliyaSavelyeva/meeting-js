@@ -79,3 +79,14 @@ const key4 = 'otherAge';
 const value4 = 35;
 console.log(addPropertyV3(user3, key, value3));
 console.log(addPropertyV3(user3, 'adress', 'Lviv'));
+
+
+function addPropertyV4(obj, key, value) {
+  const newObj = {...obj, [key]: value};
+  return newObj;
+}
+
+const user5 = {age: 48, adress: 'Kharkov'};
+const key5 = 'otherAge';
+const value5 = 56;
+console.log(addPropertyV4(user5, key5, value5));
