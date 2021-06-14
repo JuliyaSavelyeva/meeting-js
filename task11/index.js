@@ -14,7 +14,6 @@ function compareObjects(object1, object2) {
   const objTwo = Object.entries(object2).flat();
 
   return objOne.every((elem, index) => elem === objTwo[index]);
-
 }
 
 // examples
