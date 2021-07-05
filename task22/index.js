@@ -1,45 +1,28 @@
 const baseUrl = 'https://60c9e9df772a760017204c05.mockapi.io/api/v1/form';
-const button = document.querySelector('.submit-button');
-const form = document.querySelector('.login-form');
-const inputEmail = document.querySelector('#email');
-const inputName = document.querySelector('#name');
-const inputPasword = document.querySelector('#password');
-const error = document.querySelector('.error-text');
-// console.dir(button);
-// button activated
-// input: event
-// output: undefined
-const onValidateForm = () => {
-  console.log('123');
-  if (form.reportValidity()) {
-    button.disabled = false;
-  }
+
+const buttonElem = document.querySelector('.submit-button');
+const formElem = document.querySelector('.login-form');
+const errorElem = document.querySelector('.error-text');
+
+const getFormData = () => Object.fromEntries(new FormData(formElem));
+
+const validateHandler = () => {
+  buttonElem.disabled = !formElem.reportValidity();
 };
-onValidateForm();
-form.addEventListener('input', onValidateForm);
+
 // get data for server
 // input:event
 // output: undeffined
-const getFormData = event => {
-  console.log('456');
+
+const submitHandler = event => {
   event.preventDefault();
-  const formData = [...new FormData(form)].reduce(
-    (acc, [field, value]) => ({
-      ...acc,
-      [field]: value,
-    }),
-    {},
-  );
-  // const formData = `{${inputEmail.name}:${inputEmail.value}, ${inputName.name}:${inputName.value}, ${inputPasword.name}:${inputPasword.value}}`;
-  // const formData = Object.fromEntries(new FormData(inputs));
-  console.dir(formData);
 
   fetch(baseUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(formData),
+    body: JSON.stringify(getFormData()),
   })
     // input: callback
     // output: promise
@@ -47,21 +30,18 @@ const getFormData = event => {
     // response obj
     // any
 
-    .then(res => {
-      return res.json();
-    })
-
+    .then(res => res.json())
     .then(resBody => {
       alert(JSON.stringify(resBody));
-      inputEmail.value = '';
-      inputName.value = '';
-      inputPasword.value = '';
+      formElem.reset();
     })
     .catch(() => {
-      error.textContent = 'Failed to create user';
-      // Promise.reject(new Error('Failed to create user'));
+      errorElem.textContent = 'Failed to create user';
     });
 };
-form.addEventListener('submit', getFormData);
+
+formElem.addEventListener('input', validateHandler);
+formElem.addEventListener('submit', submitHandler);
+
 // input: event
 // output: undefined
