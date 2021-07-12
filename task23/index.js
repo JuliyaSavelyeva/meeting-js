@@ -1,64 +1,37 @@
-const baseUrl = 'https://60c9e9df772a760017204c05.mockapi.io/api/v1/form';
-const button = document.querySelector('.submit-button');
-const form = document.querySelector('.login-form');
-const inputEmail = document.querySelector('#email');
-const inputName = document.querySelector('#name');
-const inputPasword = document.querySelector('#password');
-const error = document.querySelector('.error-text');
-// console.dir(button);
-// button activated
-// input: event
-// output: undefined
-const onValidateForm = () => {
-  console.log('123');
-  if (form.reportValidity()) {
-    button.disabled = false;
+function positiveSum(arr) {
+  return arr.reduce((acc, num) => (num > 0 ? acc + num : acc), 0);
+
+  // if (num > 0) {
+  //   return (acc += num);
+  // }
+  // return acc; 0);
+}
+
+const arr = [1, -4, 7, 12];
+console.log(positiveSum(arr));
+
+// algo:
+// 1. Used reduce to sum num
+// 2. if arr entry return 0
+
+function divisors(integer) {
+  const result = [];
+
+  for (let index = 2; index <= integer / 2; index += 1) {
+    if (integer % index === 0) {
+      result.push(index);
+    }
   }
-};
-onValidateForm();
-form.addEventListener('input', onValidateForm);
-// get data for server
-// input:event
-// output: undeffined
-const getFormData = event => {
-  console.log('456');
-  event.preventDefault();
-  const formData = [...new FormData(form)].reduce(
-    (acc, [field, value]) => ({
-      ...acc,
-      [field]: value,
-    }),
-    {},
-  );
-  // const formData = `{${inputEmail.name}:${inputEmail.value}, ${inputName.name}:${inputName.value}, ${inputPasword.name}:${inputPasword.value}}`;
-  // const formData = Object.fromEntries(new FormData(inputs));
-  console.dir(formData);
 
-  fetch(baseUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(formData),
-  })
-    // input: callback
-    // output: promise
-    // callback inp/out
-    // response obj
-    // any
+  return !result.length ? `${integer} is prime` : result;
+}
 
-    .then(res => res.json())
-    .then(resBody => {
-      alert(JSON.stringify(resBody));
-      inputEmail.value = '';
-      inputName.value = '';
-      inputPasword.value = '';
-    })
-    .catch(() => {
-      error.textContent = 'Failed to create user';
-      // Promise.reject(new Error('Failed to create user'));
-    });
-};
-form.addEventListener('submit', getFormData);
-// input: event
-// output: undefined
+console.log(divisors(12)); // should return [2,3,4,6]
+console.log(divisors(25)); // should return [5]
+console.log(divisors(13)); // should return "13 is prime"
+
+// algo:
+// 1. create resultArray
+// 2. iterate numbers from 2 to integer/2
+// 3. if integer % number === 0 > push in resultArray
+// 4. if result.length ? result : "13 is prime"
