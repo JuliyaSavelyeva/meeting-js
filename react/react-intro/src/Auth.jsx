@@ -33,18 +33,37 @@ class Auth extends React.Component {
     });
   };
 
+  // render() {
+  //   if (!this.state.isLogging && !this.state.isLoggedIn) {
+  //     return <Login onLogin={this.onLogin} />;
+  //   }
+  //   if (this.state.isLogging) {
+  //     return <Spinner size={32} />;
+  //   }
+  //   if (this.state.isLoggedIn && !this.state.isLogging) {
+  //     return <Logout onLogout={this.onLogout} />;
+  //   }
+  //   return null;
+  // }
+
   render() {
-    if (!this.state.isLogging && !this.state.isLoggedIn) {
-      return <Login onLogin={this.onLogin} />;
+    const { isLogging, isLoggedIn } = this.state;
+    if (isLogging) {
+      return <Spinner size={40} />;
     }
-    if (this.state.isLogging) {
-      return <Spinner size={32} />;
-    }
-    if (this.state.isLoggedIn && !this.state.isLogging) {
+
+    if (isLoggedIn) {
       return <Logout onLogout={this.onLogout} />;
     }
-    return null;
+
+    return <Login onLogin={this.onLogin} />;
   }
+
+  // render() {
+  //   if (!this.state.isLoggedIn) return <Login onLogin={this.onLogin} />;
+  //   if (this.state.isLogging) return <Logout onLogout={this.onLogout} />;
+  //   return <Spinner size={20} />;
+  // }
 }
 
 export default Auth;
