@@ -1,11 +1,18 @@
 import React from 'react';
 
-const User = ({ name, age }) => {
+const User = () => {
   return (
-    <li className="user">
-      <span className="user__name">{name}</span>
-      <span className="user__age">{age}</span>
-    </li>
+    <div className="user">
+      <img
+        alt="User Avatar"
+        src="https://avatars1.githubusercontent.com/u/9919?v=4"
+        className="user__avatar"
+      />
+      <div className="user__info">
+        <span className="user__name">GitHub</span>
+        <span className="user__location">San Francisco,CA</span>
+      </div>
+    </div>
   );
 };
 

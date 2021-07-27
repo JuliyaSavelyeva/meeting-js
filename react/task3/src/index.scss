@@ -6,45 +6,54 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#root {
+.page {
+  width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.users {
-  list-style-type: none;
-  padding: 0;
-}
-
-.user {
-  margin: 8px;
-  width: 150px;
-  display: flex;
-
-  &__age {
-    font-weight: 700;
-    opacity: 0.5;
-    margin-left: auto;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
   }
 }
 
-.pagination {
+.navigation {
+  list-style-type: none;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    margin: 8px;
+  }
 }
 
-.btn {
-  height: 32px;
-  color: #fff;
-  border-radius: 8px;
-  width: 64px;
-  outline: none;
-  border: none;
-  text-transform: uppercase;
-  padding: 8px;
-  cursor: pointer;
-  background-color: green;
+.user {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+
+  &__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
+
+  &__info {
+    text-align: center;
+    font-size: 24px;
+    margin: 32px;
+  }
+
+  &__name {
+    font-weight: 700;
+  }
+
+  &__location {
+    opacity: 0.5;
+    margin-left: 16px;
+  }
 }
