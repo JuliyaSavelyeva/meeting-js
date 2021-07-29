@@ -15,7 +15,7 @@ const Users = () => {
         </li>
       </ul>
       <Route exact path="/users">
-        <span>Select a user, please</span>
+        <span>Select a user please</span>
       </Route>
       <Route path="/users/:userId" component={User} />
     </div>
